@@ -1,107 +1,70 @@
 # Blogger Word Cloud Generator 📝☁️
 
-Blogger（Blogspot）で運営されているブログの記事を分析し、単語の頻出度をランキング表示して、ワードクラウド（タグクラウド）画像を生成するPythonスクリプトです。
+Blogger（Blogspot）で運営されているブログの記事を分析し、単語の頻出度をランキング表示して、ワードクラウド画像を生成するPythonスクリプトです。
 
 あなたのブログがどんな「言葉」でできているか、可視化してみましょう！
 
-*(ここに生成した画像を載せると、より魅力的になります)*
-
------
+---
 
 ## ✨ 主な機能
 
-  * **Bloggerブログ対応:** 公開されているBloggerブログであれば、どのブログでも分析可能です。
-  * **期間指定:** 「直近30日間」「1年間（365日）」など、分析したい期間を自由に指定できます。
-  * **ワードクラウド生成:** 分析結果を元に `blog_wordcloud.png` というファイル名で画像を自動生成します。
-  * **カスタム除外ワード:** 「する」「いる」といった一般的すぎる単語を自由に除外リストに追加し、分析の精度を高められます。
-  * **シンプルな操作:** コマンドラインから簡単なコマンドで実行できます。
+* **Bloggerブログ対応:** 公開されているBloggerブログであれば、どのブログでも分析可能です。
+* **期間指定:** 「直近30日間」「1年間（365日）」など、分析したい期間を自由に指定できます。
+* **外部ファイルによる除外ワード指定:** `stopwords.txt` を編集するだけで、分析から除外したい単語を簡単に管理できます。
+* **2つの実行方法:** Webブラウザだけ（Google Colab）で動かす方法と、自分のPC（ローカル環境）で動かす方法に対応しています。
 
------
+---
 
-## ⚙️ 必要なもの
+## 🚀 使い方
 
-  * Python 3.6以上
-
------
-
-## 🚀 インストール
-
-1.  **リポジトリをクローンまたはダウンロード**
-    このリポジトリのファイルを、お使いのPCにダウンロードします。
-
-2.  **必要なライブラリをインストール**
-    ターミナル（コマンドプロンプト）で、以下のコマンドを実行して、スクリプトの実行に必要なPythonライブラリをすべてインストールします。
-
-    ```bash
-    pip install requests beautifulsoup4 janome wordcloud matplotlib
-    ```
-
------
-
-## 使い方
-
-ターミナルから以下のようにコマンドを実行します。`--url` と `--font` の指定は必須です。
-
-```bash
-python create_wordcloud.py --url [分析したいブログのURL] --days [日数] --font "[日本語フォントへのパス]"
-```
-
-### 引数の説明
-
-  * `--url` (必須): 分析したいBloggerブログのURLを指定します。
-  * `--font` (必須): ワードクラウドの日本語表示に使うフォントファイルの絶対パスを指定します。お使いのOSに合わせて設定してください。
-  * `--days` (任意): 今日から何日前までの記事を分析対象にするかを指定します。デフォルトは `30` 日です。
-
-### 実行コマンドの例
-
-#### macOS の場合
-
-```bash
-python create_wordcloud.py --url https://amufaamo.blogspot.com/ --days 365 --font "/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc"
-```
-
-#### Windows の場合
-
-```bash
-python create_wordcloud.py --url https://amufaamo.blogspot.com/ --days 365 --font "C:/Windows/Fonts/YuGothM.ttc"
-```
-
-実行が成功すると、コマンドを実行したフォルダに `blog_wordcloud.png` という画像ファイルが作成されます。
-
------
-
-## 🔧 カスタマイズ：除外ワードの追加
-
-分析結果のランキングを見て、「この単語は一般的すぎるから除外したいな」と思った場合は、スクリプトを直接編集して\*\*カスタム除外ワード（ストップワード）\*\*を追加できます。
-
-`create_wordcloud.py` ファイルの上部にある `CUSTOM_STOP_WORDS` というリストに、除外したい単語をクォーテーション（`'`）で囲んで追加してください。
-
-```python
-# 除外したい単語をこのリストに追加してください
-CUSTOM_STOP_WORDS = {
-    # ユーザーが指定した単語
-    'する', 'いる', 
-    
-    # その他、一般的すぎる可能性のある単語の例
-    'ある', 'ない', '思う', 'こと', 'もの',
-    'なる', 'よう', 'みたい', 'いう', 'これ',
-    'それ', 'いい', 'さん', 'ちゃん', 'くん',
-    
-    # ↓ここに新しい単語を自由に追加できます
-    'すごい', 'いつも'
-}
-```
-
-リストを編集して保存した後、再度スクリプトを実行すると、追加した単語がカウントから除外され、よりブログの個性を反映したワードクラウドが生成されます。
-
-## 💻 ブラウザで簡単に実行 (Google Colab)
+### 方法1：ブラウザで簡単に実行 (Google Colab)
 
 PCへの環境構築は不要です。以下のボタンをクリックするだけで、スマホやPCのブラウザから直接ワードクラウドを生成できます。
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/amufaamo/blog-to-tagcloud/blob/main/wordcloud_notebook.ipynb)
 
-### 使い方
+**実行手順:**
 1. 上の「Open In Colab」ボタンをクリックします。
-2. 表示されたページで、ブログのURLや分析したい日数を入力します。
+2. 表示されたページで、あなたのブログURLとGitHubリポジトリURL、分析したい日数を入力します。
 3. フォームの下にあるコードの左側にある**再生（▶）ボタン**をクリックします。
 4. しばらく待つと、単語ランキングとワードクラウド画像が表示されます。
+
+---
+
+### 方法2：自分のPCで実行 (ローカル環境)
+
+1.  **リポジトリをクローン**
+    ```bash
+    git clone [https://github.com/amufaamo/blog-to-tagcloud.git](https://github.com/amufaamo/blog-to-tagcloud.git)
+    cd blog-to-tagcloud
+    ```
+
+2.  **ライブラリをインストール**
+    ```bash
+    pip install requests beautifulsoup4 janome wordcloud matplotlib
+    ```
+
+3.  **スクリプトを実行**
+    ターミナルで `create_wordcloud_local.py` を実行します。`--url`と`--font`の指定は必須です。
+
+    **macOS の場合:**
+    ```bash
+    python create_wordcloud_local.py --url https://あなたのブログURL/ --days 365 --font "/System/Library/Fonts/ヒラギノ角ゴシック W3.ttc"
+    ```
+
+    **Windows の場合:**
+    ```bash
+    python create_wordcloud_local.py --url https://あなたのブログURL/ --days 365 --font "C:/Windows/Fonts/YuGothM.ttc"
+    ```
+
+---
+
+## 🔧 除外ワードのカスタマイズ
+
+分析結果から除外したい単語は、`stopwords.txt` ファイルを編集することで、自由に管理できます。
+
+1. リポジトリにある `stopwords.txt` を開きます。
+2. 除外したい単語を1行に1つずつ追記・編集します。
+3. ファイルを保存し、GitHubにプッシュします。
+
+Colab版、ローカル版ともに、次回の実行時からこのファイルが参照され、リスト内の単語が自動で分析から除外されます。
