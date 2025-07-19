@@ -93,3 +93,15 @@ CUSTOM_STOP_WORDS = {
 ```
 
 リストを編集して保存した後、再度スクリプトを実行すると、追加した単語がカウントから除外され、よりブログの個性を反映したワードクラウドが生成されます。
+
+## 💻 ブラウザで簡単に実行 (Google Colab)
+
+PCへの環境構築は不要です。以下のボタンをクリックするだけで、スマホやPCのブラウザから直接ワードクラウドを生成できます。
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/amufaamo/blog-to-tagcloud/blob/main/wordcloud_notebook.ipynb)
+
+### 使い方
+1. 上の「Open In Colab」ボタンをクリックします。
+2. 表示されたページで、ブログのURLや分析したい日数を入力します。
+3. フォームの下にあるコードの左側にある**再生（▶）ボタン**をクリックします。
+4. しばらく待つと、単語ランキングとワードクラウド画像が表示されます。
